@@ -162,13 +162,14 @@ class GiiyCRUDController extends Controller
     {
         try {
             $model = $this->loadModel($id);
+            // Если модель описывает файл
             if (!($model instanceof IFileBased))
                 throw new CException('wrong action');
-
 
             $file = CUploadedFile::getInstanceByName(get_class($model));
 
             if ($file->error) {
+                // ошибки для виджета ModelFileUpload
                 switch ($file->error) {
                     case UPLOAD_ERR_INI_SIZE:
                         $errmsg = 'UPLOAD_ERR_INI_SIZE';break;
@@ -206,17 +207,20 @@ class GiiyCRUDController extends Controller
                     Yii::app()->end();
                 }
             } elseif (!$model->save()) {
-                throw new CException('upload error: ' .print_r($model->getErrors(),true));
+                throw new CException('upload error: ' . (YII_DEBUG?print_r($model->getErrors(),true):''));
             }
         } catch (Exception $e) {
             if (Yii::app()->request->isAjaxRequest) {
-                echo json_encode(array(
+                $errors = array(
                     'code'=>$e->getCode(),
                     'error'=>$e->getMessage(),
-                    'trace'=>$e->getTrace(),
-                    'file' => $e->getFile(),
-                    'line' => $e->getLine(),
-                ));
+                );
+                if (YII_DEBUG) {
+                    $errors['trace'] = $e->getTrace();
+                    $errors['file'] = $e->getFile();
+                    $errors['line'] = $e->getLine();
+                }
+                echo json_encode($errors);
                 Yii::app()->end();
             } else
                 throw $e;
