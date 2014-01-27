@@ -20,10 +20,10 @@ class Giiy extends CModule
             $this->modelsPath = Yii::getPathOfAlias('application.models');
 
         if (!self::$pixPath)
-            self::$pixPath = Yii::getPathOfAlias('webroot').'/pix';
+            self::$pixPath = Yii::getPathOfAlias('webroot').DIRECTORY_SEPARATOR.'pix';
 
         if (!self::$videoPath)
-            self::$videoPath = Yii::getPathOfAlias('webroot').'/video';
+            self::$videoPath = Yii::getPathOfAlias('webroot').DIRECTORY_SEPARATOR.'video';
 
         if (!file_exists(self::$pixPath))
             mkdir(self::$pixPath);
