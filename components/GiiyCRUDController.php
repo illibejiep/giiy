@@ -2,7 +2,14 @@
 
 class GiiyCRUDController extends Controller
 {
-    public $layout='//main';
+    public $layout='//admin';
+
+    public function init()
+    {
+        Yii::app()->setLayoutPath(Yii::getPathOfAlias('giiy.views.layouts'));
+    }
+
+
     /**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
