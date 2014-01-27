@@ -1,9 +1,9 @@
 <?php
 
-class Video extends BaseVideo implements IFileBased, Iillustrated
+class GiiyVideo extends BaseVideo implements IFileBased, Iillustrated
 {
     private $_tmpPath;
-    /** @return Video */
+    /** @return GiiyVideo */
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
 	}
@@ -11,13 +11,13 @@ class Video extends BaseVideo implements IFileBased, Iillustrated
     public function getPath()
     {
         if ($this->id)
-            return VIDEO_PATH.DIRECTORY_SEPARATOR.$this->id.'.'.$this->getType();
+            return Giiy::$videoPath.DIRECTORY_SEPARATOR.$this->id.'.'.$this->getType();
 
         return null;
     }
     public function getUrl()
     {
-        return Yii::app()->params['frontendUrl'].'/video/'.$this->id.'.'.$this->getType();
+        return Giiy::$videoUrl.DIRECTORY_SEPARATOR.$this->id.'.'.$this->getType();
     }
 
     public function setFile($path)
