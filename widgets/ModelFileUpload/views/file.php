@@ -1,7 +1,7 @@
 <div class="fileUploadWidget">
     <? foreach ($value as $fileModel):?>
         <div style="width: 200px">
-        <? if ($fileModel instanceof Video):?>
+        <? if ($fileModel instanceof GiiyVideo):?>
             <? $this->widget('Jwplayer',array(
                     'width'=>$fileModel->width,
                     'height'=>$fileModel->height,
