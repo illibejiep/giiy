@@ -1,6 +1,6 @@
 <?php
 interface Iillustrated
 {
-    /** @return Picture|null */
+    /** @return GiiyPicture|null */
     public function getPicture();
 }

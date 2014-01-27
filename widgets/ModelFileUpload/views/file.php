@@ -13,7 +13,7 @@
                         'image'=>$fileModel->picture?$fileModel->picture->getUrl():'#',
                     )
             ));?>
-        <? elseif ($fileModel instanceof Picture):?>
+        <? elseif ($fileModel instanceof GiiyPicture):?>
             <img src="<?=$fileModel->getResizeUrl(180,120);?>">
         <? elseif (isset($fileModel->picture)):?>
             <img src="<?=$fileModel->picture?$fileModel->picture->getResizeUrl(180,120):'';?>">
