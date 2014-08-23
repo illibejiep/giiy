@@ -17,7 +17,7 @@
  */
 class GiiyModelGenerator extends CCodeGenerator {
 
-	public $codeModel = 'ext.giiy.giiyModel.GiiyModelCode';
+	public $codeModel = 'giiy.giiyModel.GiiyModelCode';
 
 	/**
 	 * Returns the table names in an array.

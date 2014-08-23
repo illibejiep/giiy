@@ -14,7 +14,7 @@ class GiiyPicture extends BaseGiiyPicture implements IFileBased, Iillustrated
     public function getPath()
     {
         if ($this->id)
-            return Giiy::$pixPath. DIRECTORY_SEPARATOR .$this->id.'.'.$this->getType();
+            return GiiyModule::$pixPath. DIRECTORY_SEPARATOR .$this->id.'.'.$this->getType();
 
         return null;
     }
@@ -32,7 +32,7 @@ class GiiyPicture extends BaseGiiyPicture implements IFileBased, Iillustrated
         if ($this->id) {
             $dir = (int)($this->id/1000);
             $dir .= DIRECTORY_SEPARATOR . ($this->id - 1000*(int)($this->id/1000));
-            return Giiy::$pixPath.DIRECTORY_SEPARATOR.'resize' .DIRECTORY_SEPARATOR. $dir;
+            return GiiyModule::$pixPath.DIRECTORY_SEPARATOR.'resize' .DIRECTORY_SEPARATOR. $dir;
         }
 
         return null;
@@ -40,7 +40,7 @@ class GiiyPicture extends BaseGiiyPicture implements IFileBased, Iillustrated
 
     public function getUrl()
     {
-        return Giiy::$pixUrl . '/' . $this->id.'.'.$this->getType();
+        return GiiyModule::$pixUrl . '/' . $this->id.'.'.$this->getType();
     }
 
     public function getResizeUrl($width,$height)
@@ -48,7 +48,7 @@ class GiiyPicture extends BaseGiiyPicture implements IFileBased, Iillustrated
         if ($this->id) {
             $dir = (int)($this->id/1000);
             $dir .= '/' . ($this->id -1000*(int)($this->id/1000));
-            return Giiy::$pixUrl . '/resize/' . $dir . '/' . $width.'x'.$height.'.'.$this->getType();
+            return GiiyModule::$pixUrl . '/resize/' . $dir . '/' . $width.'x'.$height.'.'.$this->getType();
         }
 
         return null;

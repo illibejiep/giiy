@@ -1,6 +1,6 @@
 <?php
 
-class GiiyVideo extends BaseVideo implements IFileBased, Iillustrated
+class GiiyVideo extends BaseGiiyVideo implements IFileBased, Iillustrated
 {
     private $_tmpPath;
     /** @return GiiyVideo */
@@ -11,28 +11,28 @@ class GiiyVideo extends BaseVideo implements IFileBased, Iillustrated
     public function getPath()
     {
         if ($this->id)
-            return Giiy::$videoPath.DIRECTORY_SEPARATOR.$this->id.'.'.$this->getType();
+            return GiiyModule::$videoPath.DIRECTORY_SEPARATOR.$this->id.'.'.$this->getType();
 
         return null;
     }
     public function getUrl()
     {
-        return Giiy::$videoUrl.DIRECTORY_SEPARATOR.$this->id.'.'.$this->getType();
+        return GiiyModule::$videoUrl.DIRECTORY_SEPARATOR.$this->id.'.'.$this->getType();
     }
 
     public function setFile($path)
     {
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $mime = $finfo->file($path);
-        if(!in_array($mime,VideoTypeEnum::$mime))
+        if(!in_array($mime,GiiyVideoTypeEnum::$mime))
             throw new CException('wrong video file');
 
         $movie = new FFmpegMovie($path);
 
-        $this->type = VideoTypeEnum::createByMime($mime);;
-        if ($this->type->id != VideoTypeEnum::FLV) {
+        $this->type = GiiyVideoTypeEnum::createByMime($mime);;
+        if ($this->type->id != GiiyVideoTypeEnum::FLV) {
             $movie->convertToFLV();
-            $this->type = new VideoTypeEnum(VideoTypeEnum::FLV);
+            $this->type = new GiiyVideoTypeEnum(GiiyVideoTypeEnum::FLV);
             $movie = new FFmpegMovie($path);
         }
 

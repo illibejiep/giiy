@@ -7,10 +7,12 @@ class ModelFileUpload extends CWidget
     /** @var  GiiyActiveRecord */
     public $model;
     public $multiple = false;
+
+    public $modelController;
 	/**
 	 * @var string name of the form view to be rendered
 	 */
-	public $viewDir = 'ext.giiy.widgets.ModelFileUpload.views';
+	public $viewDir = 'giiy.widgets.ModelFileUpload.views';
 
     public function init()
     {
@@ -36,11 +38,18 @@ class ModelFileUpload extends CWidget
 	{
         $view = $this->viewDir.'.file';
 
+        if (!$this->modelController)
+            $this->modelController = '/'.get_class($this->model);
+
+        if ($this->model instanceof GiiyPicture || $this->model instanceof GiiyVideo)
+            $this->modelController = '/giiy/'.get_class($this->model);
+
 	    $this->render($view, array(
             'value' => $this->value,
             'model' => $this->model,
             'attribute' => $this->attribute,
             'multiple'  => $this->multiple,
+            'modelController' => $this->modelController,
         ));
 
 		$this->registerClientScript();

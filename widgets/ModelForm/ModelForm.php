@@ -8,7 +8,7 @@ class ModelForm extends TbActiveForm
 
     public function init()
     {
-        $assets = Yii::app()->getAssetManager()->publish(dirname(__FILE__) . '/../assets');
+        $assets = Yii::app()->getAssetManager()->publish(dirname(__FILE__) . '/assets');
         Yii::app()->clientScript->registerScriptFile($assets . '/js/modelForm.js');
 
         Yii::app()->clientScript->registerPackage('modelForm');
